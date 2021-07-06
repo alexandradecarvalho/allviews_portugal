@@ -1,4 +1,5 @@
 {% load static %}
+{% load allviews_extras %}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -90,10 +91,10 @@
               <div class="content d-flex flex-column justify-content-center" data-aos="fade-left">
                 <h3>Sobre Nós</h3>
                 <p>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Duis aute irure dolor in reprehenderit
+                  Filial portuguesa de uma reputada marca internacional. Representamos o grupo austríaco Michael Pachleinter.
                 </p>
                 <br/>
-                <h3>Os Nossos Valores</h3>
+                <h3 style="margin-top: 7vh;">Os Nossos Valores</h3>
                 <div class="row">
                   <div class="col-md-6 icon-box" data-aos="zoom-in" data-aos-delay="100">
                     <i class="bx bx-key"></i>
@@ -128,17 +129,13 @@
         <div class="container">
 
           <div class="row">
-            <div class="col-lg-4 col-md-6 col-6">
-              <img src="{% static 'assets/img/clients/dh.png'%}" class="img-fluid" alt="" data-aos="zoom-in" data-aos-delay="100">
+              {% for brand in brands %}
+                <div class="col-lg-4 col-md-6 col-6 client-row" style="display: flex; justify-content: center; align-items: center;">
+                    {% with 'assets/img/clients/'|addstr:brand.picture as image_src %}
+                        <img src="{% static 'assets/img/clients/'|addstr:brand.picture %}" style="padding: 2vh 0vw;" class="img-fluid" alt="" data-aos="zoom-in" data-aos-delay="{{ forloop.counter }}00">
+                    {% endwith %}
             </div>
-            <div class="col-lg-4 col-md-6 col-6 client-row">
-              <img src="{% static 'assets/img/clients/kn.png'%}" class="img-fluid" alt="" data-aos="zoom-in" data-aos-delay="300">
-            </div>
-
-            <div class="col-lg-4 col-md-6 col-6 client-row">
-              <img src="{% static 'assets/img/clients/rvd.svg'%}" class="img-fluid" alt="" data-aos="zoom-in" data-aos-delay="400">
-            </div>
-
+            {% endfor %}
           </div>
 
         </div>
@@ -150,15 +147,15 @@
 
           <div class="text-center" data-aos="zoom-in">
             <h3>Trabalhe Connosco!</h3>
-            <p> Se tem uma marca de óculos, somos a equipa certa para a levar aos olhos de todos os portugueses! </p>
-            <a class="cta-btn" href="#">Quero Ser Parceiro</a>
+            <p> Se tem um negócio de venda de óculos, somos a equipa certa para o ajudar a levar as melhores armações aos olhos de todos os portugueses! </p>
+            <a class="cta-btn" href="mailto:contact@allviews.pt">Quero Ser Parceiro</a>
           </div>
 
         </div>
       </section><!-- End Cta Section -->
 
       <!-- ======= Services Section ======= -->
-      <section id="services" class="services">
+      <!--<section id="services" class="services">
         <div class="container">
 
           <div class="section-title" data-aos="fade-down">
@@ -213,25 +210,24 @@
           </div>
 
         </div>
-      </section><!-- End Services Section -->
+      </section> End Services Section -->
 
       <!-- ======= Portfolio Section ======= -->
       <section id="portfolio" class="portfolio section-bg">
         <div class="container">
 
           <div class="section-title" data-aos="fade-down">
-            <span>Portfolio</span>
-            <h2>Portfolio</h2>
-            <p>Sit sint consectetur velit quisquam cupiditate impedit suscipit alias</p>
+            <span>Os Nossos Produtos</span>
+            <h2>Os Nossos Produtos</h2>
           </div>
 
           <div class="row" data-aos="fade-up" data-aos-delay="150">
             <div class="col-lg-12 d-flex justify-content-center">
               <ul id="portfolio-flters">
-                <li data-filter="*" class="filter-active">All</li>
-                <li data-filter=".filter-app">App</li>
-                <li data-filter=".filter-card">Card</li>
-                <li data-filter=".filter-web">Web</li>
+                <li data-filter="*" class="filter-active">Todos</li>
+                <li data-filter=".filter-app">K</li>
+                <li data-filter=".filter-card">DH</li>
+                <li data-filter=".filter-web">RVD</li>
               </ul>
             </div>
           </div>
@@ -648,30 +644,30 @@
         <div class="container">
 
           <div class="section-title" data-aos="fade-down">
-            <span>Contact Us</span>
-            <h2>Contact Us</h2>
+            <span>Contactos</span>
+            <h2>Contactos</h2>
           </div>
 
           <div class="row justify-content-center">
             <div class="col-lg-4 col-md-12" data-aos="fade-up" data-aos-delay="100">
               <div class="info-box">
                 <i class="bx bx-map"></i>
-                <h3>Our Address</h3>
-                <p>A108 Adam Street, New York, NY 535022</p>
+                <h3>Estamos em</h3>
+                <p>Porto, Portugal</p>
               </div>
             </div>
             <div class="col-lg-4 col-md-6 mt-4 mt-lg-0" data-aos="fade-up" data-aos-delay="200">
               <div class="info-box">
                 <i class="bx bx-envelope"></i>
-                <h3>Email Us</h3>
-                <p>info@example.com<br>contact@example.com</p>
+                <h3>Email</h3>
+                  <a href="mailto:contact@allviews.pt"><p>contact@allviews.pt</p></a>
               </div>
             </div>
             <div class="col-lg-4 col-md-6 mt-4 mt-lg-0" data-aos="fade-up" data-aos-delay="300">
               <div class="info-box">
                 <i class="bx bx-phone-call"></i>
-                <h3>Call Us</h3>
-                <p>+1 5589 55488 55<br>+1 6678 254445 41</p>
+                <h3>Contacto Telefónico</h3>
+                  <a href="tel:+351 926 544 688"><p>+351 926 544 688</p></a>
               </div>
             </div>
           </div>
@@ -711,7 +707,7 @@
     <!-- ======= Footer ======= -->
     <footer id="footer">
 
-      <div class="footer-newsletter">
+      <!--<div class="footer-newsletter">
         <div class="container">
           <div class="row justify-content-center">
             <div class="col-lg-6">
@@ -723,7 +719,7 @@
             </div>
           </div>
         </div>
-      </div>
+      </div>-->
 
       <div class="footer-top">
         <div class="container">

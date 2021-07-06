@@ -13,9 +13,6 @@ class BrandPhoto(models.Model):
     picture = models.ImageField()
     brand = models.ForeignKey(Brand, on_delete=models.CASCADE)
 
-    def __str__(self):
-        return self.name
-
 
 class Frame(models.Model):
     name = models.CharField(max_length=50)
@@ -31,7 +28,4 @@ class Frame(models.Model):
 class Photo(models.Model):
     picture = models.ImageField()
     frame = models.ForeignKey(Frame, on_delete=models.CASCADE)
-
-    def __str__(self):
-        return self.name
 
