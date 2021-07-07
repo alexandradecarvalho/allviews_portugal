@@ -10,7 +10,7 @@ class Brand(models.Model):
 
 
 class BrandPhoto(models.Model):
-    picture = models.ImageField()
+    picture = models.ImageField(upload_to='static/assets/img/clients')
     brand = models.ForeignKey(Brand, on_delete=models.CASCADE)
 
 
@@ -26,6 +26,6 @@ class Frame(models.Model):
 
 
 class Photo(models.Model):
-    picture = models.ImageField()
+    picture = models.ImageField(upload_to='static/assets/img/portfolio')
     frame = models.ForeignKey(Frame, on_delete=models.CASCADE)
 

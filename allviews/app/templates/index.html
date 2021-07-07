@@ -61,7 +61,7 @@
 
         <nav class="nav-menu d-none d-lg-block">
           <ul>
-            <li class="active"><a href="index.html">Início</a></li>
+            <li class="active"><a href="{% url 'allviews' %}">Início</a></li>
             <li class="drop-down"><a href="">Sobre</a>
               <ul>
                 <li><a href="#about">Sobre Nós</a></li>
@@ -95,26 +95,22 @@
                 </p>
                 <br/>
                 <h3 style="margin-top: 7vh;">Os Nossos Valores</h3>
-                <div class="row">
+                <div class="row" style="text-align: center">
                   <div class="col-md-6 icon-box" data-aos="zoom-in" data-aos-delay="100">
                     <i class="bx bx-key"></i>
                     <h4>Integridade</h4>
-                    <p>Acreditamos em manter a integridade em todas as situações. Orgulhamo-nos de manter sempre a nossa palavra e da nossa capacidade de admitir erros honestamente. </p>
                   </div>
                   <div class="col-md-6 icon-box" data-aos="zoom-in" data-aos-delay="200">
                     <i class="bx bx-door-open"></i>
                     <h4>Abertura</h4>
-                    <p>Tentamos ser abertos com o outro e sempre acreditar nas suas boas intenções</p>
                   </div>
                   <div class="col-md-6 icon-box" data-aos="zoom-in" data-aos-delay="300">
                     <i class="bx bx-donate-heart"></i>
                     <h4>Paixão</h4>
-                    <p>Valorizamos a paixão para alcançar o sucesso pessoal</p>
                   </div>
                   <div class="col-md-6 icon-box" data-aos="zoom-in" data-aos-delay="400">
                     <i class="bx bx-walk"></i>
                     <h4>Ação</h4>
-                    <p>Ação em detrimento de hesitação, o que inclui ter mente aberta para novos conceitos</p>
                 </div>
               </div>
             </div><!-- End .content-->
@@ -129,10 +125,10 @@
         <div class="container">
 
           <div class="row">
-              {% for brand in brands %}
+              {% for brand_record in brands %}
                 <div class="col-lg-4 col-md-6 col-6 client-row" style="display: flex; justify-content: center; align-items: center;">
-                    {% with 'assets/img/clients/'|addstr:brand.picture as image_src %}
-                        <img src="{% static 'assets/img/clients/'|addstr:brand.picture %}" style="padding: 2vh 0vw;" class="img-fluid" alt="" data-aos="zoom-in" data-aos-delay="{{ forloop.counter }}00">
+                    {% with 'assets/img/clients/'|addstr:brand_record.0.1.picture as image_src %}
+                        <img src="{% static 'assets/img/clients/'|addstr:brand_record.0.1.picture %}" style="padding: 2vh 0vw;" class="img-fluid" alt="" data-aos="zoom-in" data-aos-delay="{{ forloop.counter }}00">
                     {% endwith %}
             </div>
             {% endfor %}
@@ -225,145 +221,38 @@
             <div class="col-lg-12 d-flex justify-content-center">
               <ul id="portfolio-flters">
                 <li data-filter="*" class="filter-active">Todos</li>
-                <li data-filter=".filter-app">K</li>
-                <li data-filter=".filter-card">DH</li>
-                <li data-filter=".filter-web">RVD</li>
+                  {% for brand_record in brands %}
+                <li data-filter=".filter-{{ brand_record.0.0 }}">{{ brand_record.0.0 }}</li>
+                  {% endfor %}
               </ul>
             </div>
           </div>
 
           <div class="row portfolio-container" data-aos="fade-up" data-aos-delay="300">
-
-            <div class="col-lg-4 col-md-6 portfolio-item filter-app">
+              {% for brand_record in brands %}
+                {% for frame in brand_record.1 %}
+            <div class="col-lg-4 col-md-6 portfolio-item filter-{{ brand_record.0.0 }}">
               <div class="portfolio-wrap">
-                <img src="{% static 'assets/img/portfolio/portfolio-1.jpg" class="img-fluid'%}" alt="">
+                  <img src="{% static '../'|addstr:frame.1.picture %}" class="img-fluid" alt="">
+                  {% with 'assets/img/portfolio/'|addstr:frame.1.picture as image_src %}
+                        <img src="{% static 'assets/img/portfolio/'|addstr:frame.1.picture %}"  class="img-fluid" alt="">
+                    {% endwith %}
                 <div class="portfolio-info">
-                  <h4>App 1</h4>
-                  <p>App</p>
+                  <h4>{{ frame.0 }} - {{ brand_record.0.0 }}</h4>
                 </div>
                 <div class="portfolio-links">
-                  <a href="{% static 'assets/img/portfolio/portfolio-1.jpg'%}" data-gall="portfolioGallery" class="venobox" title="App 1"><i class="bx bx-plus"></i></a>
+                  <!--<a href="{% static 'assets/img/portfolio/'|addstr:frame.1.picture %}" data-gall="portfolioGallery" class="venobox" title="App 1"><i class="bx bx-plus"></i></a>-->
                   <a href="portfolio-details.html" title="More Details"><i class="bx bx-link"></i></a>
                 </div>
               </div>
             </div>
-
-            <div class="col-lg-4 col-md-6 portfolio-item filter-web">
-              <div class="portfolio-wrap">
-                <img src="{% static 'assets/img/portfolio/portfolio-2.jpg'%}" class="img-fluid" alt="">
-                <div class="portfolio-info">
-                  <h4>Web 3</h4>
-                  <p>Web</p>
-                </div>
-                <div class="portfolio-links">
-                  <a href="{% static 'assets/img/portfolio/portfolio-2.jpg'%}" data-gall="portfolioGallery" class="venobox" title="Web 3"><i class="bx bx-plus"></i></a>
-                  <a href="portfolio-details.html" title="More Details"><i class="bx bx-link"></i></a>
-                </div>
-              </div>
-            </div>
-
-            <div class="col-lg-4 col-md-6 portfolio-item filter-app">
-              <div class="portfolio-wrap">
-                <img src="{% static 'assets/img/portfolio/portfolio-3.jpg'%}" class="img-fluid" alt="">
-                <div class="portfolio-info">
-                  <h4>App 2</h4>
-                  <p>App</p>
-                </div>
-                <div class="portfolio-links">
-                  <a href="{% static 'assets/img/portfolio/portfolio-3.jpg'%}" data-gall="portfolioGallery" class="venobox" title="App 2"><i class="bx bx-plus"></i></a>
-                  <a href="portfolio-details.html" title="More Details"><i class="bx bx-link"></i></a>
-                </div>
-              </div>
-            </div>
-
-            <div class="col-lg-4 col-md-6 portfolio-item filter-card">
-              <div class="portfolio-wrap">
-                <img src="{% static 'assets/img/portfolio/portfolio-4.jpg'%}" class="img-fluid" alt="">
-                <div class="portfolio-info">
-                  <h4>Card 2</h4>
-                  <p>Card</p>
-                </div>
-                <div class="portfolio-links">
-                  <a href="{% static 'assets/img/portfolio/portfolio-4.jpg'%}" data-gall="portfolioGallery" class="venobox" title="Card 2"><i class="bx bx-plus"></i></a>
-                  <a href="portfolio-details.html" title="More Details"><i class="bx bx-link"></i></a>
-                </div>
-              </div>
-            </div>
-
-            <div class="col-lg-4 col-md-6 portfolio-item filter-web">
-              <div class="portfolio-wrap">
-                <img src="{% static 'assets/img/portfolio/portfolio-5.jpg'%}" class="img-fluid" alt="">
-                <div class="portfolio-info">
-                  <h4>Web 2</h4>
-                  <p>Web</p>
-                </div>
-                <div class="portfolio-links">
-                  <a href="{% static 'assets/img/portfolio/portfolio-5.jpg'%}" data-gall="portfolioGallery" class="venobox" title="Web 2"><i class="bx bx-plus"></i></a>
-                  <a href="portfolio-details.html" title="More Details"><i class="bx bx-link"></i></a>
-                </div>
-              </div>
-            </div>
-
-            <div class="col-lg-4 col-md-6 portfolio-item filter-app">
-              <div class="portfolio-wrap">
-                <img src="{% static 'assets/img/portfolio/portfolio-6.jpg'%}" class="img-fluid" alt="">
-                <div class="portfolio-info">
-                  <h4>App 3</h4>
-                  <p>App</p>
-                </div>
-                <div class="portfolio-links">
-                  <a href="{% static 'assets/img/portfolio/portfolio-6.jpg'%}" data-gall="portfolioGallery" class="venobox" title="App 3"><i class="bx bx-plus"></i></a>
-                  <a href="portfolio-details.html" title="More Details"><i class="bx bx-link"></i></a>
-                </div>
-              </div>
-            </div>
-
-            <div class="col-lg-4 col-md-6 portfolio-item filter-card">
-              <div class="portfolio-wrap">
-                <img src="{% static 'assets/img/portfolio/portfolio-7.jpg'%}" class="img-fluid" alt="">
-                <div class="portfolio-info">
-                  <h4>Card 1</h4>
-                  <p>Card</p>
-                </div>
-                <div class="portfolio-links">
-                  <a href="{% static 'assets/img/portfolio/portfolio-7.jpg'%}" data-gall="portfolioGallery" class="venobox" title="Card 1"><i class="bx bx-plus"></i></a>
-                  <a href="portfolio-details.html" title="More Details"><i class="bx bx-link"></i></a>
-                </div>
-              </div>
-            </div>
-
-            <div class="col-lg-4 col-md-6 portfolio-item filter-card">
-              <div class="portfolio-wrap">
-                <img src="{% static 'assets/img/portfolio/portfolio-8.jpg'%}" class="img-fluid" alt="">
-                <div class="portfolio-info">
-                  <h4>Card 3</h4>
-                  <p>Card</p>
-                </div>
-                <div class="portfolio-links">
-                  <a href="{% static 'assets/img/portfolio/portfolio-8.jpg'%}" data-gall="portfolioGallery" class="venobox" title="Card 3"><i class="bx bx-plus"></i></a>
-                  <a href="portfolio-details.html" title="More Details"><i class="bx bx-link"></i></a>
-                </div>
-              </div>
-            </div>
-
-            <div class="col-lg-4 col-md-6 portfolio-item filter-web">
-              <div class="portfolio-wrap">
-                <img src="{% static 'assets/img/portfolio/portfolio-9.jpg'%}" class="img-fluid" alt="">
-                <div class="portfolio-info">
-                  <h4>Web 3</h4>
-                  <p>Web</p>
-                </div>
-                <div class="portfolio-links">
-                  <a href="{% static 'assets/img/portfolio/portfolio-9.jpg'%}" data-gall="portfolioGallery" class="venobox" title="Web 3"><i class="bx bx-plus"></i></a>
-                  <a href="portfolio-details.html" title="More Details"><i class="bx bx-link"></i></a>
-                </div>
-              </div>
-            </div>
+                {% endfor %}
+            {% endfor %}
 
           </div>
 
         </div>
-      </section><!-- End Portfolio Section -->
+      </section> <!--End Portfolio Section -->
 
       <!-- ======= Testimonials Section ======= -->
       <section id="testimonials" class="testimonials">
@@ -436,9 +325,8 @@
         <div class="container">
 
           <div class="section-title" data-aos="fade-down">
-            <span>Team</span>
-            <h2>Team</h2>
-            <p>Sit sint consectetur velit quisquam cupiditate impedit suscipit alias</p>
+            <span>Equipa</span>
+            <h2>Equipa</h2>
           </div>
 
           <div class="row">
@@ -479,7 +367,7 @@
               </div>
             </div>
 
-            <div class="col-xl-3 col-lg-4 col-md-6 mt-4 mt-lg-0" data-wow-delay="0.2s">
+            <div class="col-xl-3 col-lg-4 col-md-6 mt-4 mt-lg-0" data-wow-delay="0.2s" style="margin-bottom: 5vh">
               <div class="member" data-aos="fade-up" data-aos-delay="300">
                 <img src="{% static 'assets/img/team/team-3.jpg'%}" class="img-fluid" alt="">
                 <div class="member-info">
@@ -521,7 +409,7 @@
       </section><!-- End Team Section -->
 
       <!-- ======= Pricing Section ======= -->
-      <section id="pricing" class="pricing">
+      <!--<section id="pricing" class="pricing">
         <div class="container">
 
           <div class="section-title" data-aos="fade-down">
@@ -574,16 +462,16 @@
           </div>
 
         </div>
-      </section><!-- End Pricing Section -->
+      </section> End Pricing Section -->
 
       <!-- ======= F.A.Q Section ======= -->
-      <section id="faq" class="faq">
+      <section id="faq" class="faq" style="margin-top: 5vh;">
         <div class="container">
 
           <div class="section-title" data-aos="fade-down">
             <span>F.A.Q</span>
             <h2>F.A.Q</h2>
-            <p>Frequently Asked Questions</p>
+            <p>Questões Frequentes</p>
           </div>
 
           <div class="faq-list">
@@ -726,28 +614,35 @@
           <div class="row">
 
             <div class="col-lg-3 col-md-6 footer-contact">
-              <h3>Plato</h3>
+              <h3>All Views</h3>
               <p>
-                A108 Adam Street <br>
-                New York, NY 535022<br>
-                United States <br><br>
-                <strong>Phone:</strong> +1 5589 55488 55<br>
-                <strong>Email:</strong> info@example.com<br>
+                Porto, Portugal <br><br>
+                <strong>Telemóvel:</strong> +351 926 544 688<br>
+                <strong>Email:</strong> contact@allviews.pt<br>
               </p>
             </div>
 
-            <div class="col-lg-3 col-md-6 footer-links">
-              <h4>Useful Links</h4>
+              <div class="col-lg-3 col-md-6 footer-links" style="text-align: center">
+              <h4>As Nossas Redes Sociais</h4>
+              <div class="social-links mt-3">
+                <!--<a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>-->
+                <a href="https://www.facebook.com/Allviews-Portugal-101510125138077" class="facebook"><i class="bx bxl-facebook"></i></a>
+                <a href="https://www.instagram.com/allviews_portugal/" class="instagram"><i class="bx bxl-instagram"></i></a>
+                <!--<a href="#" class="google-plus"><i class="bx bxl-skype"></i></a>-->
+                <a href="#" class="linkedin"><i class="bx bxl-linkedin"></i></a>
+              </div>
+            </div>
+
+            <div class="col-lg-3 col-md-6 footer-links" >
+              <h4>Links</h4>
               <ul>
-                <li><i class="bx bx-chevron-right"></i> <a href="#">Home</a></li>
-                <li><i class="bx bx-chevron-right"></i> <a href="#">About us</a></li>
-                <li><i class="bx bx-chevron-right"></i> <a href="#">Services</a></li>
-                <li><i class="bx bx-chevron-right"></i> <a href="#">Terms of service</a></li>
-                <li><i class="bx bx-chevron-right"></i> <a href="#">Privacy policy</a></li>
+                <li><i class="bx bx-chevron-right"></i> <a href="{% url 'allviews' %}">Início</a></li>
+                <li><i class="bx bx-chevron-right"></i> <a href="#about">Sobre</a></li>
+                <li><i class="bx bx-chevron-right"></i> <a href="#portfolio">Produtos</a></li>
               </ul>
             </div>
 
-            <div class="col-lg-3 col-md-6 footer-links">
+            <!--<div class="col-lg-3 col-md-6 footer-links">
               <h4>Our Services</h4>
               <ul>
                 <li><i class="bx bx-chevron-right"></i> <a href="#">Web Design</a></li>
@@ -756,19 +651,7 @@
                 <li><i class="bx bx-chevron-right"></i> <a href="#">Marketing</a></li>
                 <li><i class="bx bx-chevron-right"></i> <a href="#">Graphic Design</a></li>
               </ul>
-            </div>
-
-            <div class="col-lg-3 col-md-6 footer-links">
-              <h4>Our Social Networks</h4>
-              <p>Cras fermentum odio eu feugiat lide par naso tierra videa magna derita valies</p>
-              <div class="social-links mt-3">
-                <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
-                <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
-                <a href="#" class="instagram"><i class="bx bxl-instagram"></i></a>
-                <a href="#" class="google-plus"><i class="bx bxl-skype"></i></a>
-                <a href="#" class="linkedin"><i class="bx bxl-linkedin"></i></a>
-              </div>
-            </div>
+            </div>-->
 
           </div>
         </div>
