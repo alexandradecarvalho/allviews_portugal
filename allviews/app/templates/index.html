@@ -222,7 +222,7 @@
               <ul id="portfolio-flters">
                 <li data-filter="*" class="filter-active">Todos</li>
                   {% for brand_record in brands %}
-                <li data-filter=".filter-{{ brand_record.0.0 }}">{{ brand_record.0.0 }}</li>
+                <li data-filter=".filter-{{ brand_record.0.0|mystrip:' ' }}">{{ brand_record.0.0 }}</li>
                   {% endfor %}
               </ul>
             </div>
@@ -231,14 +231,14 @@
           <div class="row portfolio-container" data-aos="fade-up" data-aos-delay="300">
               {% for brand_record in brands %}
                 {% for frame in brand_record.1 %}
-            <div class="col-lg-4 col-md-6 portfolio-item filter-{{ brand_record.0.0 }}">
+            <div class="col-lg-4 col-md-6 portfolio-item filter-{{ brand_record.0.0|mystrip:' ' }}">
               <div class="portfolio-wrap">
                   <img src="{% static '../'|addstr:frame.1.picture %}" class="img-fluid" alt="">
                   {% with 'assets/img/portfolio/'|addstr:frame.1.picture as image_src %}
                         <img src="{% static 'assets/img/portfolio/'|addstr:frame.1.picture %}"  class="img-fluid" alt="">
                     {% endwith %}
                 <div class="portfolio-info">
-                  <h4>{{ frame.0 }} - {{ brand_record.0.0 }}</h4>
+                  <h4>{{ frame.0 }}</h4>
                 </div>
                 <div class="portfolio-links">
                   <!--<a href="{% static 'assets/img/portfolio/'|addstr:frame.1.picture %}" data-gall="portfolioGallery" class="venobox" title="App 1"><i class="bx bx-plus"></i></a>-->
