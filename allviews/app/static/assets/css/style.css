@@ -1685,3 +1685,8 @@ section {
   text-align: center;
   font-size: 13px;
 }
+
+
+.owl-carousel img, .portfolio-details-carousel img{
+  width: 70% !important;
+}

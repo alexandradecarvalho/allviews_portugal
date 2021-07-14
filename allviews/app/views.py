@@ -22,6 +22,11 @@ def index(request):
 
 
 def details(request, frame_name):
-    frame = Frame.objects.filter(name=frame_name)
-    tparams = {'frame': frame, 'photos': Photo.objects.filter(frame=frame)}
+    frame = Frame.objects.filter(name=frame_name)[0]
+    tparams = {'frame': frame, 'photos': []}
+    all_photos = Photo.objects.all()
+    for photo in all_photos:
+        if photo.frame == frame:
+            print(photo.picture)
+            tparams['photos'] += [photo]
     return render(request, 'portfolio-details.html', tparams)
