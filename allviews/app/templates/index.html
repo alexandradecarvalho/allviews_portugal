@@ -54,7 +54,7 @@
       <div class="container d-flex align-items-center">
 
         <div class="logo mr-auto">
-          <h1 class="text-light"><a href="index.html"><span>All Views</span></a></h1>
+          <h1 class="text-light"><a href="{% url 'allviews' %}"><span>All Views</span></a></h1>
           <!-- Uncomment below if you prefer to use an image logo -->
           <!-- <a href="index.html"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
         </div>
@@ -121,7 +121,9 @@
       </section><!-- End About Section -->
 
       <!-- ======= Clients Section ======= -->
+        <h3 style="margin-top: 7vh; font-weight: bold; padding-left: 10vw">As Nossas Marcas</h3>
       <section id="brands" class="clients">
+
         <div class="container">
 
           <div class="row">
@@ -241,8 +243,7 @@
                   <h4>{{ frame.0 }}</h4>
                 </div>
                 <div class="portfolio-links">
-                  <!--<a href="{% static 'assets/img/portfolio/'|addstr:frame.1.picture %}" data-gall="portfolioGallery" class="venobox" title="App 1"><i class="bx bx-plus"></i></a>-->
-                  <a href="portfolio-details.html" title="More Details"><i class="bx bx-link"></i></a>
+                  <a href="{% url '' %}" title="More Details"><i class="bx bx-plus"></i></a>
                 </div>
               </div>
             </div>

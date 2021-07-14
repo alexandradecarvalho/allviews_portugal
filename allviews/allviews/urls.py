@@ -21,4 +21,5 @@ from app import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.index, name="allviews"),
+    path('details/<slug:frame_name>', views.details, name="details"),
 ]

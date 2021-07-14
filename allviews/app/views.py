@@ -4,23 +4,6 @@ from app.models import Frame, Photo, Brand, BrandPhoto
 
 
 # Create your views here.
-# def index(request):
-#   tparams = {'brands':[]}
-#  existing_frames = []
-#
-#   for photo in Photo.objects.all():
-#      if name := photo.frame.name not in existing_frames: # show only 1 photo per frame
-#         existing_frames += [name]
-#        if brand := photo.frame.brand not in tparams:
-#           tparams[brand] = []
-#      tparams[brand] += [photo] #divides existing photos by brand
-#
-#   for photo in BrandPhoto.objects.all():
-#      tparams['brands'] += [(photo, photo.brand.name)]
-#
-#   return render(request, 'index.html', tparams)
-
-
 def index(request):
     tparams = {'brands': []}
 
@@ -36,3 +19,9 @@ def index(request):
             tparams['brands'] += [((brand_photo.brand.name, brand_photo), frame_record)]
 
     return render(request, 'index.html', tparams)
+
+
+def details(request, frame_name):
+    frame = Frame.objects.filter(name=frame_name)
+    tparams = {'frame': frame, 'photos': Photo.objects.filter(frame=frame)}
+    return render(request, 'portfolio-details.html', tparams)
